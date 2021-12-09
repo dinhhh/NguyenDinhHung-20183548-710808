@@ -20,7 +20,7 @@ public class LocationSupportRushOrderTest {
     @ParameterizedTest
     @CsvSource({
             "Hà Nội,true",
-            "Hồ Chí Minh,true",
+            "Hồ Chí Minh,false",
             "H62a,false",
             "H()a,false"
     })

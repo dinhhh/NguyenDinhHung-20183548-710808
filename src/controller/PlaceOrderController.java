@@ -97,6 +97,7 @@ public class PlaceOrderController extends BaseController{
      * @param phoneNumber
      */
     public boolean validatePhoneNumber(String phoneNumber) {
+        // HungND-20183548
         if (phoneNumber == null || phoneNumber.isEmpty() || phoneNumber.charAt(0) != '0' || phoneNumber.length() != 10) {
             return false;
         }
@@ -114,9 +115,10 @@ public class PlaceOrderController extends BaseController{
 
     /**
      * The method validates name of user
-     * @param name
+     * @param name User's name
      */
     public boolean validateName(String name) {
+        // HungND-20183548
         if (name == null || name.isEmpty()) {
             return false;
         }
@@ -134,9 +136,9 @@ public class PlaceOrderController extends BaseController{
     /**
      * The method validates user's address
      * @param address
-     * @return
      */
     public boolean validateAddress(String address) {
+        // HungND-20183548
         if (address == null || address.isEmpty()) {
             return false;
         }

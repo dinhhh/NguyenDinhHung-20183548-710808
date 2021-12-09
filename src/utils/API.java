@@ -79,6 +79,7 @@ public class API {
 	 * @throws IOException
 	 */
 	private static HttpURLConnection getHttpURLConnection(String url, String method, String token) throws IOException {
+		// HungND-20183548
 		LOGGER.info("Request URL: " + url + "\n");
 		URL line_api_url = new URL(url);
 		HttpURLConnection conn = (HttpURLConnection) line_api_url.openConnection();
