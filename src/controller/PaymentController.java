@@ -93,7 +93,7 @@ public class PaymentController extends BaseController {
 			PaymentTransaction transaction = interbank.payOrder(card, amount, contents);
 
 			result.put("RESULT", "PAYMENT SUCCESSFUL!");
-			result.put("MESSAGE", "You have succesffully paid the order!");
+			result.put("MESSAGE", "You have successfully paid the order!");
 		} catch (PaymentException | UnrecognizedException ex) {
 			result.put("MESSAGE", ex.getMessage());
 		}

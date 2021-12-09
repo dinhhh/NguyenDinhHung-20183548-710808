@@ -2,6 +2,7 @@ package views.screen.payment;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import controller.PaymentController;
 import entity.cart.Cart;
@@ -16,10 +17,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import utils.Configs;
+import utils.Utils;
 import views.screen.BaseScreenHandler;
+import views.screen.cart.CartScreenHandler;
 import views.screen.popup.PopupScreen;
 
 public class PaymentScreenHandler extends BaseScreenHandler {
+
+	private static Logger LOGGER = Utils.getLogger(PaymentScreenHandler.class.getName());
 
 	@FXML
 	private Button btnConfirmPayment;
@@ -62,7 +67,8 @@ public class PaymentScreenHandler extends BaseScreenHandler {
 	@FXML
 	private TextField securityCode;
 
-	void confirmToPayOrder() throws IOException{
+	void confirmToPayOrder() throws IOException {
+		LOGGER.info("Click confirm to pay order");
 		String contents = "pay order";
 		PaymentController ctrl = (PaymentController) getBController();
 		Map<String, String> response = ctrl.payOrder(invoice.getAmount(), contents, cardNumber.getText(), holderName.getText(),

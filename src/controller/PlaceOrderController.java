@@ -21,9 +21,12 @@ import views.screen.popup.PopupScreen;
  */
 public class PlaceOrderController extends BaseController{
 
-    public static final String ADDRESS = "Address";
-    public static final String PHONE_NUMBER = "Phone number";
-    public static final String NAME = "Name";
+    /**
+     * For reduce hard code
+     */
+    public static final String ADDRESS = "address";
+    public static final String PHONE_NUMBER = "phone";
+    public static final String NAME = "name";
 
     /**
      * Just for logging purpose
@@ -88,7 +91,11 @@ public class PlaceOrderController extends BaseController{
         String phoneNumber = info.get(PHONE_NUMBER);
         return validateAddress(address) && validateName(name) && validatePhoneNumber(phoneNumber);
     }
-    
+
+    /**
+     * The method validates the phone number of user
+     * @param phoneNumber
+     */
     public boolean validatePhoneNumber(String phoneNumber) {
         if (phoneNumber == null || phoneNumber.isEmpty() || phoneNumber.charAt(0) != '0' || phoneNumber.length() != 10) {
             return false;
@@ -104,7 +111,11 @@ public class PlaceOrderController extends BaseController{
 
         return isValid;
     }
-    
+
+    /**
+     * The method validates name of user
+     * @param name
+     */
     public boolean validateName(String name) {
         if (name == null || name.isEmpty()) {
             return false;
@@ -119,7 +130,12 @@ public class PlaceOrderController extends BaseController{
 
         return isValid;
     }
-    
+
+    /**
+     * The method validates user's address
+     * @param address
+     * @return
+     */
     public boolean validateAddress(String address) {
         if (address == null || address.isEmpty()) {
             return false;
