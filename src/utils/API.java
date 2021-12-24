@@ -31,7 +31,7 @@ public class API {
 	/**
 	 * Thuoc tinh nay giup format ngay thang nam theo dinh dang
 	 */
-	public static DateFormat DATE_FORMATER = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+	public static DateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
 	/**
 	 * Thuoc tinh nay giup log ra thong tin o console
@@ -62,12 +62,10 @@ public class API {
 		BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 		String inputLine;
 		StringBuilder response = new StringBuilder(); // using StringBuilder for the sake of memory and performance
-		while ((inputLine = in.readLine()) != null)
-			System.out.println(inputLine);
-		response.append(null + "\n");
-		in.close();
-		LOGGER.info("Respone Info: " + response.substring(0, response.length() - 1).toString());
-		return response.substring(0, response.length() - 1).toString();
+		while ((inputLine = in.readLine()) != null) {
+			response.append(inputLine);
+		}
+		return response.toString();
 	}
 
 	/**

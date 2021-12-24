@@ -1,5 +1,6 @@
 package controller;
 
+import controller.impl.ShippingFeeCalculatorImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -15,7 +16,7 @@ class ValidatePhoneNumberTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		placeOrderController = new PlaceOrderController();
+		placeOrderController = new PlaceOrderController(new ShippingFeeCalculatorImpl());
 	}
 
 	@ParameterizedTest

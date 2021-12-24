@@ -11,6 +11,7 @@ import common.exception.MediaNotAvailableException;
 import common.exception.PlaceOrderException;
 import controller.PlaceOrderController;
 import controller.ViewCartController;
+import controller.impl.ShippingFeeCalculatorImpl;
 import entity.cart.CartMedia;
 import entity.order.Order;
 import javafx.fxml.FXML;
@@ -104,7 +105,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 	public void requestToPlaceOrder() throws SQLException, IOException {
 		try {
 			// create placeOrderController and process the order
-			PlaceOrderController placeOrderController = new PlaceOrderController();
+			PlaceOrderController placeOrderController = new PlaceOrderController(new ShippingFeeCalculatorImpl());
 			if (placeOrderController.getListCartMedia().size() == 0){
 				PopupScreen.error("You don't have anything to place");
 				return;

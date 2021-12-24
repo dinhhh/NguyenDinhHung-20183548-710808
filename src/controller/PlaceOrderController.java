@@ -3,17 +3,13 @@ package controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
 import java.util.logging.Logger;
 
 import entity.cart.Cart;
 import entity.cart.CartMedia;
-import common.exception.InvalidDeliveryInfoException;
 import entity.invoice.Invoice;
 import entity.order.Order;
 import entity.order.OrderMedia;
-import views.screen.popup.PopupScreen;
 
 /**
  * This class controls the flow of place order usecase in our AIMS project
@@ -27,6 +23,15 @@ public class PlaceOrderController extends BaseController{
     public static final String ADDRESS = "address";
     public static final String PHONE_NUMBER = "phone";
     public static final String NAME = "name";
+
+    private ShippingFeeCalculator calculateShippingFee;
+
+    public PlaceOrderController() {
+    }
+
+    public PlaceOrderController(ShippingFeeCalculator calculateShippingFee) {
+        this.calculateShippingFee = calculateShippingFee;
+    }
 
     /**
      * Just for logging purpose
@@ -164,9 +169,6 @@ public class PlaceOrderController extends BaseController{
      * @return shippingFee
      */
     public int calculateShippingFee(Order order){
-        Random rand = new Random();
-        int fees = (int)( ( (rand.nextFloat()*10)/100 ) * order.getAmount() );
-        LOGGER.info("Order Amount: " + order.getAmount() + " -- Shipping Fees: " + fees);
-        return fees;
+        return calculateShippingFee.calculateShippingFee(order);
     }
 }

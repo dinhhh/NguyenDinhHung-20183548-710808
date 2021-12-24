@@ -77,6 +77,7 @@ public class ShippingScreenHandler extends BaseScreenHandler implements Initiali
 	@FXML
 	void submitDeliveryInfo(MouseEvent event) throws IOException, InterruptedException, SQLException {
 
+		PlaceOrderController placeOrderController = new PlaceOrderController();
 		// add info to messages
 		HashMap messages = new HashMap<>();
 		messages.put("name", name.getText());
@@ -105,6 +106,9 @@ public class ShippingScreenHandler extends BaseScreenHandler implements Initiali
 
 		if (!supportRushOrder.get()) {
 			String message = "Your location not support rush order for medias";
+			PopupScreen.error(message);
+		} else if (!placeOrderController.validateDeliveryInfo(messages)) {
+			String message = "Your info is invalid. Please check again";
 			PopupScreen.error(message);
 		} else {
 			// calculate shipping fees

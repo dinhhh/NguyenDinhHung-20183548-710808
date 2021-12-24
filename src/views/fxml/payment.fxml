@@ -63,7 +63,7 @@
                   <Font name="Calibri" size="24.0" />
                </font>
             </Label>
-            <TextField fx:id="expirationDate" text="1125">
+            <TextField fx:id="expirationDate" text="11/25">
                <font>
                   <Font name="Calibri" size="24.0" />
                </font>

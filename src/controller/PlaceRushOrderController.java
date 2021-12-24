@@ -37,10 +37,7 @@ public class PlaceRushOrderController {
         if (location == null) {
             return false;
         }
-        if (PROVINCES_SUPPORT_RUSH_ODER.contains(location)) {
-            return true;
-        }
-        return false;
+        return PROVINCES_SUPPORT_RUSH_ODER.contains(location);
     }
 
     /**
@@ -48,10 +45,7 @@ public class PlaceRushOrderController {
      * @param mediaID Cart's media id
      */
     public boolean isItemsSupportRushOrder(int mediaID) {
-        if (MEDIA_IDS_SUPPORT_RUSH_ORDER.contains(mediaID)) {
-            return true;
-        }
-        return false;
+        return MEDIA_IDS_SUPPORT_RUSH_ORDER.contains(mediaID);
     }
 
     /**

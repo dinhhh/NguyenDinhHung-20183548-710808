@@ -1,5 +1,6 @@
 package controller;
 
+import controller.impl.ShippingFeeCalculatorImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,7 +15,7 @@ public class ValidateNameTest {
 
     @BeforeEach
     void setUp() throws Exception {
-        placeOrderController = new PlaceOrderController();
+        placeOrderController = new PlaceOrderController(new ShippingFeeCalculatorImpl());
     }
 
     @ParameterizedTest

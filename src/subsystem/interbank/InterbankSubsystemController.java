@@ -1,6 +1,7 @@
 package subsystem.interbank;
 
 import java.util.Map;
+import java.util.logging.Logger;
 
 import common.exception.InternalServerErrorException;
 import common.exception.InvalidCardException;
@@ -15,6 +16,7 @@ import entity.payment.PaymentTransaction;
 import utils.Configs;
 import utils.MyMap;
 import utils.Utils;
+import views.screen.cart.CartScreenHandler;
 
 public class InterbankSubsystemController {
 
@@ -22,6 +24,7 @@ public class InterbankSubsystemController {
 	private static final String SECRET_KEY = "Ba2kdnfU9tl=";
 	private static final String PAY_COMMAND = "pay";
 	private static final String VERSION = "1.0.0";
+	private static Logger LOGGER = Utils.getLogger(InterbankSubsystemController.class.getName());
 
 	private static InterbankBoundary interbankBoundary = new InterbankBoundary();
 
@@ -50,6 +53,7 @@ public class InterbankSubsystemController {
 		Map<String, Object> requestMap = new MyMap();
 		requestMap.put("version", VERSION);
 		requestMap.put("transaction", transaction);
+		LOGGER.info("Request " + requestMap);
 
 		String responseText = interbankBoundary.query(Configs.PROCESS_TRANSACTION_URL, generateData(requestMap));
 		MyMap response = null;
@@ -59,6 +63,7 @@ public class InterbankSubsystemController {
 			e.printStackTrace();
 			throw new UnrecognizedException();
 		}
+		LOGGER.info("Response " + response);
 
 		return makePaymentTransaction(response);
 	}
@@ -66,12 +71,12 @@ public class InterbankSubsystemController {
 	private PaymentTransaction makePaymentTransaction(MyMap response) {
 		if (response == null)
 			return null;
-		MyMap transcation = (MyMap) response.get("transaction");
-		CreditCard card = new CreditCard((String) transcation.get("cardCode"), (String) transcation.get("owner"),
-				Integer.parseInt((String) transcation.get("cvvCode")), (String) transcation.get("dateExpired"));
+		MyMap transaction = (MyMap) response.get("transaction");
+		CreditCard card = new CreditCard((String) transaction.get("cardCode"), (String) transaction.get("owner"),
+				Integer.parseInt((String) transaction.get("cvvCode")), (String) transaction.get("dateExpired"));
 		PaymentTransaction trans = new PaymentTransaction((String) response.get("errorCode"), card,
-				(String) transcation.get("transactionId"), (String) transcation.get("transactionContent"),
-				Integer.parseInt((String) transcation.get("amount")), (String) transcation.get("createdAt"));
+				(String) transaction.get("transactionId"), (String) transaction.get("transactionContent"),
+				Integer.parseInt((String) transaction.get("amount")), (String) transaction.get("createdAt"));
 
 		switch (trans.getErrorCode()) {
 		case "00":

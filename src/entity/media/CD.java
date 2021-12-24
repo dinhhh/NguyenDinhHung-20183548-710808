@@ -99,9 +99,5 @@ public class CD extends Media {
 		}
     }
 
-    @Override
-    public List getAllMedia() {
-        return null;
-    }
 
 }
