@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import controller.PlaceOrderController;
 import common.exception.InvalidDeliveryInfoException;
 import controller.PlaceRushOrderController;
+import controller.impl.SimpleRushOrderValidator;
 import entity.invoice.Invoice;
 import entity.order.Order;
 import entity.order.OrderMedia;
@@ -94,7 +95,7 @@ public class ShippingScreenHandler extends BaseScreenHandler implements Initiali
 
 		AtomicBoolean supportRushOrder = new AtomicBoolean(true);
 		if (isRushOrderBtn.isSelected()) {
-			PlaceRushOrderController placeRushOrderController = new PlaceRushOrderController();
+			PlaceRushOrderController placeRushOrderController = new PlaceRushOrderController(new SimpleRushOrderValidator());
 			String location = address.getText();
 			this.order.getlstOrderMedia().forEach(c -> {
 				OrderMedia orderMedia = (OrderMedia) c;

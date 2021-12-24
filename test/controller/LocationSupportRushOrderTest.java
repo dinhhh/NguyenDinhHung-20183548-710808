@@ -1,5 +1,6 @@
 package controller;
 
+import controller.impl.SimpleRushOrderValidator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,7 +15,7 @@ public class LocationSupportRushOrderTest {
 
     @BeforeEach
     void setUp() throws Exception {
-        placeRushOrderController = new PlaceRushOrderController();
+        placeRushOrderController = new PlaceRushOrderController(new SimpleRushOrderValidator());
     }
 
     @ParameterizedTest

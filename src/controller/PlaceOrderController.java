@@ -150,7 +150,7 @@ public class PlaceOrderController extends BaseController{
 
         boolean isValid = true;
         for (char ch : address.toCharArray()) {
-            if ( Character.isSpace(ch) ) {
+            if ( ch == ' ' ) {
                 continue;
             }
             if ( !Character.isLetter(ch) ) {

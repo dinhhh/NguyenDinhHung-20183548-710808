@@ -1,7 +1,5 @@
 package controller;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -10,6 +8,12 @@ import java.util.logging.Logger;
  * @author HungND-20183548
  */
 public class PlaceRushOrderController {
+
+    private RushOrderInputValidator rushOrderInputValidator;
+
+    public PlaceRushOrderController(RushOrderInputValidator rushOrderInputValidator) {
+        this.rushOrderInputValidator = rushOrderInputValidator;
+    }
 
     /**
      * Specify provinces that support rush order
@@ -62,13 +66,7 @@ public class PlaceRushOrderController {
      * @param time User's receive time
      */
     public boolean validateReceiveTime(String time) {
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(RECEIVE_TIME_FORMATTER);
-            LocalDateTime localDateTime = LocalDateTime.parse(time, formatter);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+        return rushOrderInputValidator.isValidReceiveTime(time, RECEIVE_TIME_FORMATTER);
     }
 
     /**
@@ -76,7 +74,7 @@ public class PlaceRushOrderController {
      * @param info User's rush order info
      */
     public boolean validateRushOrderInfo(String info) {
-        return validateBasicString(info);
+        return rushOrderInputValidator.isValidRushOrderInfo(info);
     }
 
     /**
@@ -84,25 +82,8 @@ public class PlaceRushOrderController {
      * @param instruction User's rush order instruction
      */
     public boolean validateRushOrderInstruction(String instruction) {
-        return validateBasicString(instruction);
+        return rushOrderInputValidator.isValidRushOrderInstruction(instruction);
     }
 
-    private boolean validateBasicString(String info) {
-        if (info == null || info.isEmpty()) {
-            return false;
-        }
 
-        boolean isValid = true;
-        for (char ch : info.toCharArray()) {
-            if ( Character.isSpace(ch) ) {
-                continue;
-            }
-            if ( !Character.isLetter(ch) ) {
-                isValid = false;
-                break;
-            }
-        }
-
-        return isValid;
-    }
 }
